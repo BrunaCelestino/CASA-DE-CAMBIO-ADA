@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/compra/pom.xml" />
         <option value="$PROJECT_DIR$/cotacao/pom.xml" />
         <option value="$PROJECT_DIR$/cadastro/pom.xml" />
+        <option value="$PROJECT_DIR$/comun/pom.xml" />
+        <option value="$PROJECT_DIR$/comum/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>

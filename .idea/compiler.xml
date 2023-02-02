@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -9,13 +10,9 @@
         <module name="compra" />
         <module name="cotacao" />
         <module name="cadastro" />
+        <module name="comum" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="cadastro" target="11" />
-      <module name="compra" target="11" />
-      <module name="cotacao" target="11" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
