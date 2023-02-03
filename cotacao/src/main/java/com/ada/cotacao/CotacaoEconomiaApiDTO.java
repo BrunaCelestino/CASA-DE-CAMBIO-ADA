@@ -1,7 +1,6 @@
 package com.ada.cotacao;
 
 import lombok.Data;
-import java.time.LocalDateTime;
 
 @Data
 public class CotacaoEconomiaApiDTO {
