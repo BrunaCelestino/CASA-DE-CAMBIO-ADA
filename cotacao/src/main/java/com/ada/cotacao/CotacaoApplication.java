@@ -15,11 +15,4 @@ public class CotacaoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CotacaoApplication.class, args);
 	}
-
-	@RequestMapping("/v1/cotacao")
-	@ResponseBody
-	List<CotacaoEconomiaApiDTO> home(){
-		CotacaoEconomiaApiClient cotacaoEconomia = new CotacaoEconomiaApiClient();
-		return cotacaoEconomia.getCotacaoEconomia("USD");
-	}
 }
