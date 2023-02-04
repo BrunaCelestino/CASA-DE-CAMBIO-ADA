@@ -1,10 +1,23 @@
 package com.ada.cadastro;
 
+import lombok.Data;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.time.LocalDate;
+
+@Data
+@Entity
 public class Cliente {
 
-//    Para que o cliente realize a compra, primeiro ele deve se cadastrar
-//    no sistema informando o nome, cpf, data de nascimento,
-//    estado civil e sexo. Para tanto, um microsserviço de cadastro
-//    deve ser criado, gerando um id de cliente ao final de um processamento bem sucedido.
-//    Também deverá ser criado um endpoint de consulta do cliente pelo seu cpf.
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String nome;
+    private String cpf;
+    private LocalDate dataNascimento;
+    private String estadoCivil;
+    private String sexo;
+
 }
