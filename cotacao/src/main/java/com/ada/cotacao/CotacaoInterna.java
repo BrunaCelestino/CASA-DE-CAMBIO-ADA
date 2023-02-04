@@ -1,10 +1,25 @@
 package com.ada.cotacao;
 
-public class CotacaoInterna {
+import lombok.Data;
+import java.time.LocalDateTime;
 
-//    Também deverá ser criada uma API para calcular a cotação da moeda, a qual deve chamar a API
-//    externa https://economia.awesomeapi.com.br/ informando a sigla da moeda desejada
-    // (https://economia.awesomeapi.com.br/USD/ ou https://economia.awesomeapi.com.br/EUR/).
-    // Se o cliente tentar comprar outra moeda que não USD ou EUR, deverá ser lançada uma exceção.
-//A API irá calcular o valor total com base na cotação da moeda multiplicada pelo valor desejado de compra.
+@Data
+public class CotacaoInterna {
+    private String tipoMoeda;
+    private String nomeMoeda;
+    private Double cotacaoAlta;
+    private Double cotacaoBaixa;
+    private LocalDateTime dataConsulta;
+
+    public CotacaoInterna() {
+    }
+
+    public CotacaoInterna(String tipoMoeda, String nomeMoeda, Double cotacaoAlta, Double cotacaoBaixa, LocalDateTime dataConsulta) {
+        this.tipoMoeda = tipoMoeda;
+        this.nomeMoeda = nomeMoeda;
+        this.cotacaoAlta = cotacaoAlta;
+        this.cotacaoBaixa = cotacaoBaixa;
+        this.dataConsulta = dataConsulta;
+    }
+
 }
