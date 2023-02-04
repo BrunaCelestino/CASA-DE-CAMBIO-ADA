@@ -39,4 +39,6 @@ public class CadastroApplication {
 
 		return "Olá, sou a API DE CADASTRO e estou consumindo a: "  + compraMsg + " e a: " + cotacaoMsg;
 	}
+
+
 }
