@@ -11,7 +11,6 @@ public class CotacaoEconomiaApiClient {
     private String URI = "https://economia.awesomeapi.com.br/";
     private WebClient client = WebClient.create();
 
-
     public List<CotacaoEconomiaApiDTO> getCotacaoEconomia(String currency) {
         URI = URI + currency;
         Flux<CotacaoEconomiaApiDTO> cotacaoFlux =
