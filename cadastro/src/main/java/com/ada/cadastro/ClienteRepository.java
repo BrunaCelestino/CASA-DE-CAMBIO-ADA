@@ -1,4 +1,9 @@
 package com.ada.cadastro;
 
-public class ClienteRepository {
+import org.springframework.data.repository.CrudRepository;
+
+public interface ClienteRepository extends CrudRepository<Cliente,Long> {
+
+    Cliente findByCpf (String cpf);
+
 }
