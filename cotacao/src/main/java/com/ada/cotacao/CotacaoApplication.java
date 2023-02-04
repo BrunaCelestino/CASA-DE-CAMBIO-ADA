@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @SpringBootApplication
 public class CotacaoApplication {
@@ -16,7 +18,8 @@ public class CotacaoApplication {
 
 	@RequestMapping("/v1/cotacao")
 	@ResponseBody
-	String home(){
-		return "API DE COTACAO";
+	List<CotacaoEconomiaApiDTO> home(){
+		CotacaoEconomiaApiClient cotacaoEconomia = new CotacaoEconomiaApiClient();
+		return cotacaoEconomia.getCotacaoEconomia("USD");
 	}
 }
