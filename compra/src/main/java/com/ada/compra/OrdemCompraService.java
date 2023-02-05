@@ -29,7 +29,7 @@ public class OrdemCompraService {
         ordemCompra.setValorCotação(cotacao.getCotacaoAlta());
         ordemCompra.setValorTotalOperação(cotacao.getCotacaoAlta() * ordemCompra.getValorMoedaEstrangeira());
         ordemCompra.setDataSolicitacao(LocalDate.now());
-
+        ordemCompra.setIdCliente(cadastroApiClient.getCadastro(ordemCompra.getCpfCliente()).getId());
         return ordemCompra;
     }
 
