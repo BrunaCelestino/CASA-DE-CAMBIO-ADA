@@ -16,24 +16,24 @@ public class OrdemCompraService {
 
 
     private final CrudRepository<OrdemCompra, Long> repository;
-    private final CadastroApiClient cadastroApiClient;
-
 
     public Optional<OrdemCompra> getById (Long id){
         return repository.findById(id);
     }
     public OrdemCompra obterCotacao(OrdemCompra ordemCompra) {
         CotacaoApiClient cotacaoApiClient = new CotacaoApiClient();
+        CadastroApiClient cadastroApiClient = new CadastroApiClient();
 
         CotacaoDTO cotacao = cotacaoApiClient.getCotacao(ordemCompra.getTipoMoedaEstrangeira().toString());
         ordemCompra.setValorCotação(cotacao.getCotacaoAlta());
         ordemCompra.setValorTotalOperação(cotacao.getCotacaoAlta() * ordemCompra.getValorMoedaEstrangeira());
         ordemCompra.setDataSolicitacao(LocalDate.now());
-
+        ordemCompra.setIdCliente(cadastroApiClient.getCadastro(ordemCompra.getCpfCliente()).getId());
         return ordemCompra;
     }
 
     public OrdemCompra salvar (OrdemCompra entity) throws CadastroInvalidoException {
+        CadastroApiClient cadastroApiClient = new CadastroApiClient();
         try {
             if (Objects.isNull(cadastroApiClient.getCadastro((entity.getCpfCliente())))) {
                 throw new CadastroInvalidoException("Cadastro não localizado");

@@ -1,8 +1,10 @@
 package com.ada.compra;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+@RequiredArgsConstructor
 public class CadastroApiClient {
 
     private String URI = "http://localhost:8081/cadastro/";
