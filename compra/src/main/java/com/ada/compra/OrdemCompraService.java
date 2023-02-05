@@ -22,26 +22,30 @@ public class OrdemCompraService {
     }
     public OrdemCompra obterCotacao(OrdemCompra ordemCompra) {
         CotacaoApiClient cotacaoApiClient = new CotacaoApiClient();
-        CadastroApiClient cadastroApiClient = new CadastroApiClient();
-
         CotacaoDTO cotacao = cotacaoApiClient.getCotacao(ordemCompra.getTipoMoedaEstrangeira().toString());
+
         ordemCompra.setValorCotação(cotacao.getCotacaoAlta());
         ordemCompra.setValorTotalOperação(cotacao.getCotacaoAlta() * ordemCompra.getValorMoedaEstrangeira());
         ordemCompra.setDataSolicitacao(LocalDate.now());
-        ordemCompra.setIdCliente(cadastroApiClient.getCadastro(ordemCompra.getCpfCliente()).getId());
+
         return ordemCompra;
     }
 
     public OrdemCompra salvar (OrdemCompra entity) throws CadastroInvalidoException {
+
         CadastroApiClient cadastroApiClient = new CadastroApiClient();
+        CadastroDTO cadastro = cadastroApiClient.getCadastro((entity.getCpfCliente()));
         try {
-            if (Objects.isNull(cadastroApiClient.getCadastro((entity.getCpfCliente())))) {
+            if (Objects.isNull(cadastro)) {
                 throw new CadastroInvalidoException("Cadastro não localizado");
             }
-        }catch (RestClientException e){
+            entity = obterCotacao(entity);
+            entity.setIdCliente(cadastro.getId());
+
+        } catch (RestClientException e) {
             throw new CadastroInvalidoException("Api de Cadastro não disponível");
         }
-    return repository.save(entity);
+        return repository.save(entity);
     }
 
 

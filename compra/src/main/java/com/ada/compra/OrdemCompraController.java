@@ -1,5 +1,6 @@
 package com.ada.compra;
 
+import com.ada.exceptions.CadastroInvalidoException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,11 +16,10 @@ public class OrdemCompraController {
 
     private final OrdemCompraService ordemCompraService;
 
-
-
     @PostMapping
-    public ResponseEntity<OrdemCompra> obterCotacao(@RequestBody OrdemCompra ordemCompra) {
-        OrdemCompra compra = ordemCompraService.obterCotacao(ordemCompra);
+    public ResponseEntity<OrdemCompra> criarOrdemDeCompra(@RequestBody OrdemCompra ordemCompra) throws CadastroInvalidoException {
+
+        OrdemCompra compra = ordemCompraService.salvar(ordemCompra);
         return new ResponseEntity<>(compra, HttpStatus.CREATED);
     }
 
