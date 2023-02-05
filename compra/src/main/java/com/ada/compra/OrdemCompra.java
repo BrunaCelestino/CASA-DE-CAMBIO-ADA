@@ -14,8 +14,8 @@ import java.time.LocalDate;
 public class OrdemCompra {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCompra;
+    @GeneratedValue
+    private Long Id;
     private Long idCliente;
     private String cpfCliente;
     private LocalDate dataSolicitacao;

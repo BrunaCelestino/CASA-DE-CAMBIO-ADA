@@ -1,43 +1,44 @@
 package com.ada.compra;
-import com.ada.exceptions.CadastroInvalidoException;
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
-
 import java.time.LocalDate;
-import java.util.Optional;
 
-@RequiredArgsConstructor
 @Service
 public class OrdemCompraService {
 
-    private final CrudRepository<OrdemCompra, Long> repository;
-    private final CadastroApiClient cadastroApiClient;
+    private final OrdemCompraRepository ordemCompraRepository;
 
-
-    public Optional<OrdemCompra> getById (Long id){
-        return repository.findById(id);
+    public OrdemCompraService(OrdemCompraRepository ordemCompraRepository) {
+        this.ordemCompraRepository = ordemCompraRepository;
     }
     public OrdemCompra obterCotacao(OrdemCompra ordemCompra) {
         CotacaoApiClient cotacaoApiClient = new CotacaoApiClient();
+        CadastroApiClient cliente = new CadastroApiClient();
 
+        // Obtendo a Cotação da api de Cotação
         CotacaoDTO cotacao = cotacaoApiClient.getCotacao(ordemCompra.getTipoMoedaEstrangeira().toString());
+
+        // Obtendo a Cadastro da api de Cadastro
+        CadastroDTO cadastro = cliente.getCadastro(ordemCompra.getCpfCliente());
+
+        // Colocando o valor obtido no atributo
         ordemCompra.setValorCotação(cotacao.getCotacaoAlta());
+
+        // Calculando o valor total da operação
         ordemCompra.setValorTotalOperação(cotacao.getCotacaoAlta() * ordemCompra.getValorMoedaEstrangeira());
+
+        // Colocando a data do dia
         ordemCompra.setDataSolicitacao(LocalDate.now());
 
-        return ordemCompra;
+        // Colocando o id do cliente
+        ordemCompra.setIdCliente(cadastro.getId());
+
+
+        return ordemCompraRepository.save(ordemCompra);
     }
 
-    public OrdemCompra salvar (OrdemCompra entity) throws CadastroInvalidoException {
-        try {
-            if (cadastroApiClient. ((entity.getCpfCliente()))) {
-                throw new CadastroInvalidoException("Cadastro não localizado");
-                }
-            }catch (RestClientException e){
-                throw new CadastroInvalidoException("Api de Cadastro não disponível");
-            }
+    public OrdemCompra findById(Long id) {
+
+        return ordemCompraRepository.findById(id).orElseThrow(null);
     }
 
 
