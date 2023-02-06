@@ -34,6 +34,8 @@ public class OrdemCompraService {
     public OrdemCompra salvar (OrdemCompra entity) throws CadastroInvalidoException {
 
         CadastroApiClient cadastroApiClient = new CadastroApiClient();
+        String clearCpf = entity.getCpfCliente().replaceAll("[\\.-]", "");
+        entity.setCpfCliente(clearCpf);
         CadastroDTO cadastro = cadastroApiClient.getCadastro((entity.getCpfCliente()));
         try {
             if (Objects.isNull(cadastro)) {
@@ -41,6 +43,7 @@ public class OrdemCompraService {
             }
             entity = obterCotacao(entity);
             entity.setIdCliente(cadastro.getId());
+
 
         } catch (RestClientException e) {
             throw new CadastroInvalidoException("Api de Cadastro não disponível");
